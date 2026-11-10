@@ -459,12 +459,25 @@
       font-weight: 500;
     }
 
-    .partner-logo {
-      max-height: 42px;
+
+.partner-logo {
       width: auto;
-      opacity: 0.85;
+      opacity: 0.9;
       display: block;
       margin: 0 auto;
+    }
+
+    /* Control individual de altura para equilibrar pesos visuales */
+    .logo-sanmiguel {
+      max-height: 85px;  /* Incrementado considerablemente */
+    }
+
+    .logo-ayto {
+      max-height: 38px;  /* Reducido ligeramente */
+    }
+
+    .logo-plenum {
+      max-height: 140px;  /* Incrementado bastante */
     }
 
     .social-links {
@@ -968,19 +981,16 @@
     
     <div class="collab-item">
       <div class="collab-name">Iglesia de San Miguel de los Navarros</div>
-      <!-- Ruta de imagen actualizada -->
-      <img src="logosanmiguel.png" alt="Iglesia de San Miguel de los Navarros" class="partner-logo">
+      <img src="img/logosanmiguel.png" alt="Iglesia de San Miguel de los Navarros" class="partner-logo logo-sanmiguel">
     </div>
 
     <div class="collab-item">
       <div class="collab-name">Junta Municipal Centro (Ayuntamiento de Zaragoza)</div>
-      <!-- Ruta de imagen actualizada -->
-      <img src="logotipoblancoaytozaragoza.svg" alt="Ayuntamiento de Zaragoza" class="partner-logo">
+      <img src="img/logotipoblancoaytozaragoza.svg" alt="Ayuntamiento de Zaragoza" class="partner-logo logo-ayto">
     </div>
 
     <div class="collab-item" style="margin-top: 2rem;">
-      <!-- Ruta de imagen actualizada -->
-      <img src="logoplenum.svg" alt="Plenum Ensemble" class="partner-logo">
+      <img src="img/logoplenum.svg" alt="Plenum Ensemble" class="partner-logo logo-plenum">
     </div>
   </footer>
 
