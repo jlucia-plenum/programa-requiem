@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Plenum Ensemble — Réquiem de M. J. Trotta</title>
+  
+  <!-- Carga de Fuentes (EB Garamond y Source Sans 3) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================
+       VARIABLES Y PALETA DE COLOR UNIFICADA
+       ========================================== */
+    :root {
+      --bg-canvas: #1A1A1A;       /* Fondo negro inmersivo */
+      --brand-surface: #263F59;   /* Azul corporativo Plenum */
+      --text-main: #D2CBBF;       /* Hueso claro */
+      --text-muted: #736B5C;      /* Tierra oscura */
+      
+      --font-serif: "EB Garamond", Georgia, serif;
+      --font-sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-size: 17.6px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      font-size: 1.1rem; 
+      color: var(--text-main);
+      background-color: var(--bg-canvas);
+      -webkit-font-smoothing: antialiased;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 480px; /* Contenedor óptimo para lectura móvil */
+    }
+
+    /* ==========================================
+       TIPOGRAFÍAS
+       ========================================== */
+    h1, h2, h3, .font-serif, .hero-subtitle, .piece-title, .work-highlight-title {
+      font-family: var(--font-serif);
+    }
+
+    h1 {
+      font-size: 2.75rem; 
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      text-transform: uppercase;
+      color: var(--text-main);
+      margin-top: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.875rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: var(--text-muted);
+      opacity: 0.4;
+    }
+
+    p, li, span, button, .font-sans {
+      font-family: var(--font-sans);
+    }
+
+    /* ==========================================
+       NAVEGACIÓN INTERACTIVA (STICKY)
+       ========================================== */
+    .program-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      position: sticky;
+      top: 0;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(115, 107, 92, 0.4);
+    }
+
+    .program-nav a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.5rem 0.85rem;
+      border: 1px solid rgba(115, 107, 92, 0.4);
+      border-radius: 4px;
+      background: rgba(38, 63, 89, 0.15);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .program-nav a:active {
+      background: var(--brand-surface);
+      color: #FFF;
+    }
+
+    /* ==========================================
+       HEADER Y METADATOS
+       ========================================== */
+    header {
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    .hero-tag {
+      font-size: 0.825rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      padding: 0 1.25rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.68rem;
+      font-style: italic;
+      color: var(--text-main);
+      margin-top: 0.25rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      padding: 0 1.25rem;
+    }
+
+    .concert-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.99rem;
+      color: var(--text-main);
+      border-top: 1px solid rgba(115, 107, 92, 0.3);
+      padding: 1.25rem 1.25rem 0 1.25rem;
+      margin-top: 1rem;
+    }
+
+    /* AVISOS Y PROTOCOLO DE SALA */
+    .venue-notice {
+      margin: 0 1.25rem 2rem 1.25rem;
+      padding: 1.1rem 1.25rem;
+      border-left: 2px solid var(--text-muted);
+      background-color: rgba(38, 63, 89, 0.15);
+      font-size: 0.935rem;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .venue-notice p + p {
+      margin-top: 0.5rem;
+    }
+
+    /* SECCIONES GENERALES */
+    section {
+      padding: 2rem 1.25rem;
+      border-bottom: 1px solid rgba(115, 107, 92, 0.3);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    /* ==========================================
+       PROGRAMA MUSICAL Y ACORDEONES (DESPLEGABLES)
+       ========================================== */
+    .work-highlight-title {
+      font-size: 1.75rem;
+      color: var(--text-main);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .repertoire-list {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .repertoire-item {
+      display: flex;
+      align-items: baseline;
+      padding: 0.85rem 0;
+      border-bottom: 1px dashed rgba(115, 107, 92, 0.25);
+    }
+
+    .repertoire-item:last-child {
+      border-bottom: none;
+    }
+
+    .roman-num {
+      font-family: var(--font-serif);
+      font-size: 1.56rem;
+      color: var(--text-main);
+      width: 3.5rem;
+      flex-shrink: 0;
+      font-weight: 500;
+    }
+
+    .piece-title {
+      font-size: 1.43rem;
+      color: var(--text-main);
+      flex: 1;
+    }
+
+    /* Estilos Desplegables */
+    details {
+      margin: 1rem 0;
+      background: rgba(38, 63, 89, 0.1);
+      border: 1px solid rgba(115, 107, 92, 0.3);
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    details[open] {
+      background: rgba(38, 63, 89, 0.2);
+    }
+
+    summary {
+      padding: 1rem 1.25rem;
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-main);
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+    }
+
+    details[open] summary::after {
+      content: '−';
+    }
+
+    .details-content {
+      padding: 0 1.25rem 1.25rem 1.25rem;
+      font-size: 1.045rem;
+      line-height: 1.65;
+      color: var(--text-main);
+    }
+
+    .details-content p {
+      margin-bottom: 1rem;
+    }
+
+    .details-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .details-content em {
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       TEXTOS Y TRADUCCIONES EN 2 COLUMNAS
+       ========================================== */
+    .movement-block {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(115, 107, 92, 0.2);
+    }
+
+    .movement-block:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .movement-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .movement-num {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--text-muted);
+    }
+
+    .movement-name {
+      font-family: var(--font-serif);
+      font-size: 1.56rem;
+      color: var(--text-main);
+    }
+
+    .parallel-text {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      font-size: 0.907rem;
+      line-height: 1.45;
+    }
+
+    .latin-col {
+      font-family: var(--font-sans);
+      font-style: italic;
+      color: var(--text-main);
+      padding-right: 0.25rem;
+      border-right: 1px solid rgba(115, 107, 92, 0.25);
+    }
+
+    .spanish-col {
+      font-family: var(--font-sans);
+      color: var(--text-muted);
+      padding-left: 0.25rem;
+    }
+
+    .verse-line {
+      margin-bottom: 0.35rem;
+      word-break: break-word;
+    }
+
+    .verse-line:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ==========================================
+       ELENCO ARTÍSTICO Y BIOGRAFÍAS
+       ========================================== */
+    .artist-profile {
+      margin-bottom: 2.5rem;
+    }
+
+    .artist-profile:last-child {
+      margin-bottom: 0;
+    }
+
+    .artist-photo {
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+      filter: grayscale(20%) contrast(105%);
+      display: block;
+    }
+
+    .artist-title {
+      font-size: 1.68rem;
+      color: var(--text-main);
+      margin-bottom: 0.2rem;
+    }
+
+    .artist-subtitle {
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .artist-bio p {
+      font-size: 0.99rem;
+      margin-bottom: 1rem;
+      line-height: 1.65;
+    }
+
+    .voices-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem 0.75rem;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(115, 107, 92, 0.3);
+    }
+
+    .voice-group-title {
+      font-size: 0.825rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+      font-weight: 600;
+    }
+
+    .voice-member {
+      font-size: 1.045rem;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    /* ==========================================
+       PIE DE PÁGINA Y COLABORADORES
+       ========================================== */
+    footer {
+      padding: 2.5rem 1.25rem 3rem 1.25rem;
+      background-color: #141414;
+      text-align: center;
+      font-size: 0.935rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(115, 107, 92, 0.4);
+    }
+
+    .thanks-text {
+      margin-bottom: 1.25rem;
+      color: var(--text-main);
+    }
+
+    .collaborators-text {
+      font-size: 0.825rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-muted);
+    }
+
+    .collab-item {
+      margin-bottom: 1.75rem;
+    }
+
+    .collab-name {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+
+    .partner-logo {
+      max-height: 42px;
+      width: auto;
+      opacity: 0.85;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      font-size: 0.935rem;
+    }
+
+    .social-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABECERA PRINCIPAL SIN IMÁGENES -->
+  <header>
+    <div class="hero-tag">Estreno Peninsular</div>
+    <h1>RÉQUIEM</h1>
+    <div class="hero-subtitle">De la sombra a la luz</div>
+    <p style="font-size: 1.25rem; font-family: var(--font-serif); color: var(--text-main);">Plenum ensemble y Víctor Mazzili</p>
+    
+    <div class="concert-meta">
+      <span><strong>Viernes 13 de noviembre de 2026, 20:00h</strong></span>
+      <span>Iglesia de San Miguel de los Navarros, Zaragoza</span>
+    </div>
+  </header>
+
+  <!-- NAVEGACIÓN INTERACTIVA -->
+  <nav class="program-nav">
+    <a href="#programa">Programa</a>
+    <a href="#textos">Textos</a>
+    <a href="#interpretes">Intérpretes</a>
+  </nav>
+
+  <!-- PROTOCOLO Y AVISO DE SALA -->
+  <div class="venue-notice">
+    <p>Unos 50 minutos de música sin interrupción. Se ruega no aplaudir entre movimientos.</p>
+    <p style="margin-top: 0.75rem;">Por favor, silencie el móvil y baje el brillo de la pantalla para consultar este programa.</p>
+  </div>
+
+  <!-- PROGRAMA MUSICAL Y NOTAS -->
+  <section id="programa">
+    <h2>Programa</h2>
+    
+    <div class="work-highlight-title">Requiem - Michael John Trotta</div>
+
+    <ul class="repertoire-list">
+      <li class="repertoire-item">
+        <span class="roman-num">I</span>
+        <span class="piece-title">Introit et Kyrie</span>
+      </li>
+      <li class="repertoire-item">
+        <span class="roman-num">II</span>
+        <span class="piece-title">Dies Irae</span>
+      </li>
+      <li class="repertoire-item">
+        <span class="roman-num">III</span>
+        <span class="piece-title">Offertory et Hostias</span>
+      </li>
+      <li class="repertoire-item">
+        <span class="roman-num">IV</span>
+        <span class="piece-title">Sanctus</span>
+      </li>
+      <li class="repertoire-item">
+        <span class="roman-num">V</span>
+        <span class="piece-title">Pie Jesu</span>
+      </li>
+      <li class="repertoire-item">
+        <span class="roman-num">VI</span>
+        <span class="piece-title">Agnus Dei</span>
+      </li>
+      <li class="repertoire-item">
+        <span class="roman-num">VII</span>
+        <span class="piece-title">Lux Aeterna</span>
+      </li>
+      <li class="repertoire-item">
+        <span class="roman-num">VIII</span>
+        <span class="piece-title">Libera Me</span>
+      </li>
+      <li class="repertoire-item">
+        <span class="roman-num">IX</span>
+        <span class="piece-title">Et Mors Ultra Non Erit</span>
+      </li>
+      <li class="repertoire-item">
+        <span class="roman-num">X</span>
+        <span class="piece-title">In Paradisum</span>
+      </li>
+    </ul>
+
+    <!-- ACORDEONES DE INFORMACIÓN -->
+    <details>
+      <summary>El autor</summary>
+      <div class="details-content">
+        <p>Nacido en 1978, Michael John Trotta es un compositor y director coral estadounidense con una trayectoria muy vinculada a la música vocal, tanto desde la composición como desde la dirección.</p>
+        <p>Su estilo se caracteriza por combinar la tradición coral y sacra con un lenguaje armónico contemporáneo. Le interesa especialmente escribir música que, sin renunciar a la riqueza musical, resulte accesible y expresiva para los intérpretes y el público.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>La obra</summary>
+      <div class="details-content">
+        <p>Compuesta y lanzada al público en 2024, la buena acogida de esta obra demuestra que la música sacra sigue latiendo en pleno siglo XXI.</p>
+        <p>Tras la emotiva interpretación en marzo de 2026 en Las Palmas de Gran Canaria a mano de la Coral Cantata Del Real Club Victoria, este concierto supone la presentación del Réquiem en la península por primera vez, ofreciendo al público de Zaragoza la oportunidad de escuchar la clásica misa fúnebre revisitada desde el prisma compositivo actual.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>La escucha</summary>
+      <div class="details-content">
+        <p>Una de las características más interesantes de la composición es el uso de dos motivos melódicos procedentes del canto gregoriano, que aparecen desde el comienzo y van interviniendo a lo largo de toda la obra. Estos motivos funcionan como elementos de cohesión, dando continuidad a los distintos movimientos y creando relaciones musicales entre secciones.</p>
+        <p>A través de las armonías entrelazadas, unas culminantes, otras rotas, otras disonantes y de ritmos que pueden evocar agitación o calma, Trotta expone todas las caras del tránsito emocional por el duelo, manteniendo en último lugar la esperanza, a la que acude como punto final.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>El abrazo de la memoria</summary>
+      <div class="details-content">
+        <p>“Existe un instante preciso en el que la pérdida fractura el tiempo: mientras el mundo exterior mantiene su pulso habitual, para quien sufre la ausencia el universo se detiene bruscamente.</p>
+        <p>Este Réquiem responde a ese vacío y nos invita a recorrer de manera compartida el proceso del duelo, transitando desde la perplejidad inicial y el temor ante lo desconocido hasta la búsqueda serena de refugio y consuelo.</p>
+        <p>Conforme avanza el discurso sonoro, el dolor comienza a convivir en armonía con el afecto, recordándonos que la ausencia solo nos conmueve en la medida en que la presencia de la persona amada tuvo un significado profundo.</p>
+        <p>Así, entre disonancias expresivas que anhelan la paz y versos que proclaman el fin de todo llanto, la arquitectura musical nos conduce paulatinamente desde la oscuridad hacia una luz eterna.</p>
+        <p>Más allá de una obra musical, este concierto se convierte en un espacio de acompañamiento mutuo: un abrazo entre nuestras voces para acoger la memoria de quienes dejaron huella en nuestras vidas. Ante aquello que no podemos cambiar, nos unimos en una sola emoción que honra el recuerdo y nos invita a caminar juntos con esperanza.”</p>
+      </div>
+    </details>
+
+  </section>
+
+  <!-- TEXTOS Y TRADUCCIONES EN 2 COLUMNAS -->
+  <section id="textos">
+    <h2>Textos cantados</h2>
+
+    <!-- MOVIMIENTO I -->
+    <div class="movement-block">
+      <div class="movement-header">
+        <span class="movement-num">I.</span>
+        <span class="movement-name">Introit et Kyrie</span>
+      </div>
+      <div class="parallel-text">
+        <div class="latin-col">
+          <div class="verse-line">Requiem aeternam dona eis, Domine.</div>
+          <div class="verse-line">Et lux perpetua luceat eis.</div>
+          <div class="verse-line">Te decet hymnus, Deus, in Sion,</div>
+          <div class="verse-line">Et tibi reddetur votum in Jerusalem.</div>
+          <div class="verse-line">Exaudi orationem meam,</div>
+          <div class="verse-line">Ad te omnis caro veniet.</div>
+          <div class="verse-line">Kyrie, eleison!</div>
+          <div class="verse-line">Christe, eleison!</div>
+        </div>
+        <div class="spanish-col">
+          <div class="verse-line">Dales el descanso eterno, Señor.</div>
+          <div class="verse-line">Y brille para ellos la luz perpetua.</div>
+          <div class="verse-line">A ti son las alabanzas, Dios, en Sión,</div>
+          <div class="verse-line">y en Jerusalén se cumplirán los votos en tu honor.</div>
+          <div class="verse-line">Escucha mi oración.</div>
+          <div class="verse-line">Todo hombre a ti acudirá.</div>
+          <div class="verse-line">¡Señor, ten piedad!</div>
+          <div class="verse-line">¡Cristo, ten piedad!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVIMIENTO II -->
+    <div class="movement-block">
+      <div class="movement-header">
+        <span class="movement-num">II.</span>
+        <span class="movement-name">Dies Irae</span>
+      </div>
+      <div class="parallel-text">
+        <div class="latin-col">
+          <div class="verse-line">Dies irae, dies illa</div>
+          <div class="verse-line">Solvet saeclum in favilla,</div>
+          <div class="verse-line">Teste David cum Sibylla.</div>
+          <div class="verse-line">Mors stupebit et natura,</div>
+          <div class="verse-line">Cum resurget creatura,</div>
+          <div class="verse-line">Judicanti responsura.</div>
+          <div class="verse-line">Recordare, Jesu pie,</div>
+          <div class="verse-line">Ne me perdas.</div>
+          <div class="verse-line">Huic ergo parce, Deus:</div>
+          <div class="verse-line">Dona eis requiem.</div>
+        </div>
+        <div class="spanish-col">
+          <div class="verse-line">Día de ira, aquel día</div>
+          <div class="verse-line">en que se disolverá el mundo en cenizas,</div>
+          <div class="verse-line">como atestiguan David y la Sibila.</div>
+          <div class="verse-line">La muerte y la naturaleza quedarán estupefactas</div>
+          <div class="verse-line">ante el resurgir de la humanidad</div>
+          <div class="verse-line">para responder ante el Juez.</div>
+          <div class="verse-line">Recuerda, Jesús piadoso,</div>
+          <div class="verse-line">no me pierdas.</div>
+          <div class="verse-line">A este, por tanto, perdónalo, Dios:</div>
+          <div class="verse-line">Dale el descanso.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVIMIENTO III -->
+    <div class="movement-block">
+      <div class="movement-header">
+        <span class="movement-num">III.</span>
+        <span class="movement-name">Offertory et Hostias</span>
+      </div>
+      <div class="parallel-text">
+        <div class="latin-col">
+          <div class="verse-line">Domine, Jesu Christe, Rex gloriae,</div>
+          <div class="verse-line">libera animas omnium fidelium defunctorum</div>
+          <div class="verse-line">de poenis inferni et de profundo lacu.</div>
+          <div class="verse-line">Libera eas de ore leonis</div>
+          <div class="verse-line">ne absorbeat eas tartarus, ne cadant in obscurum;</div>
+          <div class="verse-line">Sed signifer sanctus Michael</div>
+          <div class="verse-line">repraesentet eas in lucem sanctam,</div>
+          <div class="verse-line">quam olim Abrahae promisisti et semini eius.</div>
+          <div class="verse-line">Hostias et preces tibi, Domine laudis offerimus</div>
+          <div class="verse-line">tu suscipe pro animabus illis,</div>
+          <div class="verse-line">quarum hodie memoriam facimus.</div>
+        </div>
+        <div class="spanish-col">
+          <div class="verse-line">Señor Jesucristo, Rey de gloria,</div>
+          <div class="verse-line">libera las almas de todos los fieles difuntos</div>
+          <div class="verse-line">de las penas del infierno y del profundo abismo.</div>
+          <div class="verse-line">Libéralas de la boca del león,</div>
+          <div class="verse-line">que no las devore el tártaro ni caigan en las tinieblas;</div>
+          <div class="verse-line">sino que el santo portaestandarte Miguel</div>
+          <div class="verse-line">las conduzca a la luz santa</div>
+          <div class="verse-line">como prometiste antaño a Abraham y a su descendencia.</div>
+          <div class="verse-line">Ofrendas y plegarias de alabanza a ti, Señor, ofrecemos;</div>
+          <div class="verse-line">acéptalas por aquellas almas</div>
+          <div class="verse-line">de las que hoy hacemos memoria.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVIMIENTO IV -->
+    <div class="movement-block">
+      <div class="movement-header">
+        <span class="movement-num">IV.</span>
+        <span class="movement-name">Sanctus</span>
+      </div>
+      <div class="parallel-text">
+        <div class="latin-col">
+          <div class="verse-line">Sanctus, sanctus, sanctus</div>
+          <div class="verse-line">Dominus Deus Sabaoth!</div>
+          <div class="verse-line">Pleni sunt coeli et terra gloria tua.</div>
+          <div class="verse-line">Hosanna in excelsis!</div>
+          <div class="verse-line">Benedictus qui venit in nomine Domini.</div>
+          <div class="verse-line">Hosanna in excelsis!</div>
+        </div>
+        <div class="spanish-col">
+          <div class="verse-line">Santo, santo, santo,</div>
+          <div class="verse-line">¡Señor Dios de los ejércitos!</div>
+          <div class="verse-line">Llenos están el cielo y la tierra de tu gloria.</div>
+          <div class="verse-line">¡Hosanna en las alturas!</div>
+          <div class="verse-line">Bendito el que viene en nombre del Señor.</div>
+          <div class="verse-line">¡Hosanna en las alturas!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVIMIENTO V -->
+    <div class="movement-block">
+      <div class="movement-header">
+        <span class="movement-num">V.</span>
+        <span class="movement-name">Pie Jesu</span>
+      </div>
+      <div class="parallel-text">
+        <div class="latin-col">
+          <div class="verse-line">Pie Jesu, Domine, dona eis requiem.</div>
+          <div class="verse-line">Pie Jesu, Domine, dona eis requiem, sempiternam.</div>
+        </div>
+        <div class="spanish-col">
+          <div class="verse-line">Piadoso Jesús, Señor, concédeles el descanso.</div>
+          <div class="verse-line">Piadoso Jesús, Señor, concédeles el descanso eterno.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVIMIENTO VI -->
+    <div class="movement-block">
+      <div class="movement-header">
+        <span class="movement-num">VI.</span>
+        <span class="movement-name">Agnus Dei</span>
+      </div>
+      <div class="parallel-text">
+        <div class="latin-col">
+          <div class="verse-line">Agnus Dei, qui tollis peccata mundi,</div>
+          <div class="verse-line">dona eis requiem.</div>
+          <div class="verse-line">Agnus Dei, qui tollis peccata mundi,</div>
+          <div class="verse-line">dona eis requiem sempiternam.</div>
+        </div>
+        <div class="spanish-col">
+          <div class="verse-line">Cordero de Dios, que quitas los pecados del mundo,</div>
+          <div class="verse-line">concédeles descanso.</div>
+          <div class="verse-line">Cordero de Dios, que quitas los pecados del mundo,</div>
+          <div class="verse-line">concédeles el descanso eterno.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVIMIENTO VII -->
+    <div class="movement-block">
+      <div class="movement-header">
+        <span class="movement-num">VII.</span>
+        <span class="movement-name">Lux Aeterna</span>
+      </div>
+      <div class="parallel-text">
+        <div class="latin-col">
+          <div class="verse-line">Lux aeterna luceat eis, Domine,</div>
+          <div class="verse-line">cum sanctis tuis in aeternum,</div>
+          <div class="verse-line">quia pius es.</div>
+          <div class="verse-line">Requiem aeternam dona eis Domine,</div>
+          <div class="verse-line">et lux perpetua luceat eis,</div>
+          <div class="verse-line">quia pius es.</div>
+        </div>
+        <div class="spanish-col">
+          <div class="verse-line">Que la luz eterna brille para ellos, Señor,</div>
+          <div class="verse-line">junto a tus santos para siempre,</div>
+          <div class="verse-line">porque eres piadoso.</div>
+          <div class="verse-line">Concédeles, Señor, el descanso eterno,</div>
+          <div class="verse-line">y brille para ellos la luz perpetua,</div>
+          <div class="verse-line">porque eres piadoso.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVIMIENTO VIII -->
+    <div class="movement-block">
+      <div class="movement-header">
+        <span class="movement-num">VIII.</span>
+        <span class="movement-name">Libera Me</span>
+      </div>
+      <div class="parallel-text">
+        <div class="latin-col">
+          <div class="verse-line">Libera me, Domine, de morte aeterna</div>
+          <div class="verse-line">in die illa tremenda</div>
+          <div class="verse-line">quando coeli movendi sunt et terra,</div>
+          <div class="verse-line">dum veneris judicare saeculum per ignem.</div>
+          <div class="verse-line">Tremens factus sum ego et timeo,</div>
+          <div class="verse-line">dum discussio venerit atque ventura ira:</div>
+          <div class="verse-line">quando coeli movendi sunt et terra.</div>
+        </div>
+        <div class="spanish-col">
+          <div class="verse-line">Líbrame, Señor, de la muerte eterna</div>
+          <div class="verse-line">en aquel día terrible,</div>
+          <div class="verse-line">en el que los cielos y la tierra se estremezcan,</div>
+          <div class="verse-line">y desciendas para juzgar al mundo entre llamas.</div>
+          <div class="verse-line">Me invade el temor, y tiemblo,</div>
+          <div class="verse-line">ante la llegada del juicio y de la ira:</div>
+          <div class="verse-line">cuando los cielos y la tierra se estremezcan.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVIMIENTO IX -->
+    <div class="movement-block">
+      <div class="movement-header">
+        <span class="movement-num">IX.</span>
+        <span class="movement-name">Et Mors Ultra Non Erit</span>
+      </div>
+      <div class="parallel-text">
+        <div class="latin-col">
+          <div class="verse-line">Et absterget Deus omnem lacrymam ab oculis eorum,</div>
+          <div class="verse-line">et mors, mors ultra non erit,</div>
+          <div class="verse-line">neque luctus, neque clamor, neque dolor erit ultra,</div>
+          <div class="verse-line">quia prima abierunt.</div>
+          <div class="verse-line">Ubi est mors victoria tua?</div>
+          <div class="verse-line">Ubi est mors ictus tuus?</div>
+        </div>
+        <div class="spanish-col">
+          <div class="verse-line">Y Dios enjugará toda lágrima de sus ojos,</div>
+          <div class="verse-line">y la muerte, la muerte ya no existirá más,</div>
+          <div class="verse-line">ni habrá más llanto, ni clamor, ni dolor,</div>
+          <div class="verse-line">que hubieron anteriormente.</div>
+          <div class="verse-line">¿Dónde está, oh muerte, tu victoria?</div>
+          <div class="verse-line">¿Dónde está, oh muerte, tu aguijón?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOVIMIENTO X -->
+    <div class="movement-block">
+      <div class="movement-header">
+        <span class="movement-num">X.</span>
+        <span class="movement-name">In Paradisum</span>
+      </div>
+      <div class="parallel-text">
+        <div class="latin-col">
+          <div class="verse-line">In paradisum deducant angeli;</div>
+          <div class="verse-line">in tuo adventu suscipiant te martyres</div>
+          <div class="verse-line">et perducant te in civitatem sanctam Jerusalem.</div>
+          <div class="verse-line">Chorus angelorum te suscipiat</div>
+          <div class="verse-line">et cum Lazaro, quondam paupere,</div>
+          <div class="verse-line">aeternam habeas requiem.</div>
+          <div class="verse-line">Requiem aeternam dona eis, Domine,</div>
+          <div class="verse-line">Et lux perpetua luceat eis</div>
+          <div class="verse-line">Requiem aeternam</div>
+          <div class="verse-line">Requiem aeternam</div>
+        </div>
+        <div class="spanish-col">
+          <div class="verse-line">Al paraíso te lleven los ángeles;</div>
+          <div class="verse-line">a tu llegada te reciban los mártires</div>
+          <div class="verse-line">y te conduzcan a la ciudad santa de Jerusalén.</div>
+          <div class="verse-line">Que el coro de los ángeles te reciba</div>
+          <div class="verse-line">y junto a Lázaro, en otro tiempo pobre,</div>
+          <div class="verse-line">tengas el descanso eterno.</div>
+          <div class="verse-line">Dales, Señor, el descanso eterno,</div>
+          <div class="verse-line">y brille para ellos la luz perpetua.</div>
+          <div class="verse-line">Descanso eterno.</div>
+          <div class="verse-line">Descanso eterno.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ELENCO ARTÍSTICO -->
+  <section id="interpretes">
+    <h2>Intérpretes</h2>
+
+    <!-- PLENUM ENSEMBLE -->
+    <div class="artist-profile">
+      <!-- Ruta de imagen actualizada -->
+      <img src="img/fotoplenum.jpg" alt="Plenum Ensemble" class="artist-photo">
+      <div class="artist-title">Plenum Ensemble</div>
+      <div class="artist-subtitle">ENSEMBLE VOCAL</div>
+      
+      <div class="artist-bio">
+        <p>Plenum nace en septiembre de 2023 a raíz del interés de un grupo de jóvenes por indagar en las posibilidades de la música coral para ensemble. Afincados en Zaragoza, está formado por coralistas procedentes de distintos lugares de la península que cuentan con diversa experiencia y formación musical, entre ellos, instrumentistas profesionales, docentes de Música y estudiantes de canto lírico. El ensemble podría asemejarse a un coro de cámara, donde cada voz es protagonista y esencial dentro del conjunto. Actualmente, sus miembros son integrantes en activo de diferentes agrupaciones vocales, como el Coro Ixena de Zaragoza, Coro de la Asociación de las Artes Líricas de Aragón, el Coro Sinfónico de La Rioja, el Joven Coro de Andalucía y el Coro Joven de Aragón.</p>
+        
+        <p>El ensemble ha recibido formación coral a manos de grandes directores como Lluís Villamajó, Nicole Corti y Mikael Wedar; y formación vocal con profesores como César Polo y Vanesa García. En sus tres años de actividad, Plenum ha participado en numerosos proyectos, colaborando con otras formaciones vocales como Spirito, un prestigioso ensemble francés de 12 voces; Akelarre Abesbatza, coro joven del País Vasco; el Coro Joven de Aragón y el conocido grupo zaragozano B Vocal. Ha realizado diversos conciertos propios en los pueblos de la comarca de Zaragoza, con un repertorio variado desde el Renacimiento español hasta música pop de los años 90, así como colaboraciones en conciertos en la Sala Mozart con otros coros zaragozanos.</p>
+
+        <p>La mayoría del repertorio es a capella, aunque también han actuado con instrumentistas, estando abiertos a nuevos formatos grupales. Además, se han encargado de realizar composiciones y arreglos propios adaptados a la peculiaridad de sus voces.</p>
+
+        <p>En esta ocasión, la agrupación aborda su primera obra de gran formato como un gran reto, adentrándose en una estrecha conversación con el órgano, cuya simbiosis permite tejer la trama emotiva del concierto y guiar al oyente a través del recuerdo hacia la esperanza.</p>
+      </div>
+
+      <!-- LISTA DE COMPONENTES POR CUERDA -->
+      <div class="voices-grid">
+        <div>
+          <div class="voice-group-title">Sopranos</div>
+          <div class="voice-member">Clara Morillo</div>
+          <div class="voice-member">Inés Gancedo</div>
+          <div class="voice-member">Luisa Idoype</div>
+        </div>
+        <div>
+          <div class="voice-group-title">Contratenores</div>
+          <div class="voice-member">Javier Cadena</div>
+          <div class="voice-member">Didac Val</div>
+          <div class="voice-member">Iker Carrera</div>
+        </div>
+        <div>
+          <div class="voice-group-title">Tenores</div>
+          <div class="voice-member">Miguel Barrio</div>
+          <div class="voice-member">Leo Sanjurjo</div>
+        </div>
+        <div>
+          <div class="voice-group-title">Bajos</div>
+          <div class="voice-member">Javier Lucia</div>
+          <div class="voice-member">Mario Catena</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORGANISTA -->
+    <div class="artist-profile" style="margin-top: 2.5rem;">
+      <!-- Ruta de imagen actualizada -->
+      <img src="img/fotovictor.jpeg" alt="Víctor De San Martín (Víctor Mazzilli)" class="artist-photo">
+      <div class="artist-title">Víctor De San Martín (Víctor Mazzilli)</div>
+      <div class="artist-subtitle">ÓRGANO</div>
+      
+      <div class="artist-bio">
+        <p>Formado en el Conservatorio Superior de Música de Aragón, donde cursó los Grados de Dirección y Órgano, es organista titular de la Iglesia de San Miguel de los Navarros y del Monasterio de Santa Lucía. Cuenta con una dilatada trayectoria como acompañante de destacadas agrupaciones corales e instrumentales de la región, destacando su participación al órgano en la interpretación de célebres Réquiems como los de Mozart, Fauré, Jenkins y Rutter en escenarios emblemáticos como el Auditorio de Zaragoza y las catedrales de Sigüenza y Monzón. Asimismo, dirige Bal de l'arte, proyecto musical y pedagógico volcado en la formación instrumental y la creación cultural con un marcado enfoque humanista.</p>
+        
+        <p>En pro del rigor estilístico y la sensibilidad tímbrica, Víctor concibe la música como un espacio de comunicación, emoción y encuentro humano. Su enfoque artístico busca integrar el órgano en la propia respiración del coro, convirtiendo el sonido, el silencio y el color armónico en un mismo lenguaje expresivo capaz de dialogar con la acústica del templo y la percepción del oyente.</p>
+
+        <p>Su destreza al instrumento resulta esencial en este concierto para cimentar la arquitectura sonora de la obra y envolver a las voces en su recorrido hacia la luz.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA Y COLABORADORES -->
+  <footer>
+    <p class="thanks-text">Gracias por asistir a este concierto tan especial para nosotros.</p>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem;">
+      Gracias a nuestra familia y amigos por apoyar este proyecto y, especialmente a Mari y Sofía por su implicación en el mismo de manera directa y desinteresada.
+    </p>
+
+    <!-- REDES SOCIALES -->
+    <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 1rem;">Pueden seguirnos en RRSS para no perderse nada:</p>
+    <div class="social-links" style="margin-top: 0; margin-bottom: 2rem;">
+      <a href="https://instagram.com/plenum_ensemble" target="_blank" rel="noopener">Instagram @plenum_ensemble</a>
+      <a href="https://instagram.com/victormazzilli" target="_blank" rel="noopener">Instagram @victormazzilli</a>
+      <a href="https://www.youtube.com/@PlenumEnsemble" target="_blank" rel="noopener">Youtube Plenum Ensemble</a>
+    </div>
+
+    <!-- BLOQUE DE COLABORADORES -->
+    <div class="collaborators-text">Colaboran:</div>
+    
+    <div class="collab-item">
+      <div class="collab-name">Iglesia de San Miguel de los Navarros</div>
+      <!-- Ruta de imagen actualizada -->
+      <img src="img/logosanmiguel.png" alt="Iglesia de San Miguel de los Navarros" class="partner-logo">
+    </div>
+
+    <div class="collab-item">
+      <div class="collab-name">Junta Municipal Centro (Ayuntamiento de Zaragoza)</div>
+      <!-- Ruta de imagen actualizada -->
+      <img src="img/logotipoblancoaytozaragoza.svg" alt="Ayuntamiento de Zaragoza" class="partner-logo">
+    </div>
+
+    <div class="collab-item" style="margin-top: 2rem;">
+      <!-- Ruta de imagen actualizada -->
+      <img src="img/logoplenum.svg" alt="Plenum Ensemble" class="partner-logo">
+    </div>
+  </footer>
+
+</body>
+</html>
